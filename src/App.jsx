@@ -24,6 +24,14 @@ function App(props) {
   const [tasks, setTasks] = useState(props.tasks);
   const [filter, setFilter] = useState("All");
 
+  useEffect(() => {
+    fetch("http://localhost:8080/todo/all ").then(result => {
+      result.json().then(data => {
+        setTasks(data);
+      })
+    })
+  }, [])
+
   function toggleTaskCompleted(id) {
     const updatedTasks = tasks.map((task) => {
       // if this task has the same ID as the edited task
